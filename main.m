@@ -6,10 +6,15 @@ close all
 a=10;
 b=100;
 c=0;
-d=100;
+d=200;
+axis([0 100 0 100]);
 
-pig_x=round(a+(b-a).*rand(1));
-pig_y=round(c+(d-c).*rand(1));
+[pig_y, pig_x] = ginput(1);
+
+% pig_x=round(a+(b-a).*rand(1))
+% pig_y=round(c+(d-c).*rand(1))
+
+% printf(piga_x);
 
 %Constants
 
@@ -21,21 +26,15 @@ v = 50 + 10*rand-2.5
 theta = 180*atan2(pig_y, pig_x) / pi + 10*rand-2.5
 
 % v=input('What velocity would you like to launch your bird (in m/s)?');
-% 
 % theta=input('What angle would you like to launch your bird (in degress)?');
 
+% física
 theta=pi*theta/180;
-
 tmax=(2*v/g)*sin(theta);
-
 xmax=tmax*v*cos(theta);
-
 dt=tmax/100;
-
 t=0:dt:tmax-dt;
-
 x=(v*cos(theta)).*t;
-
 y=(v*sin(theta)).*t-g*.5*t.^2;
 
 % Check Limits
@@ -44,18 +43,13 @@ xypig_max = [max([x pig_x]) max([y pig_y])];
 % break
 
 vx=x/(cos(theta).*t.^2);
-
 vy=(.5*g*t.^2+y)/(sin(theta).*t);
-
 vfinal=sqrt(vx.^2+vy.^2);
-
 % plot(x,y,pig_x,pig_y)
-
 vxpig=pig_x./(t.*cos(theta));
-
 vypig=(.5*g*t.^2+pig_y)/(sin(theta).*t);
-
 vpig=sqrt(vxpig.^2+vypig.^2);
+
 
 
 for i =1 :length(t)
