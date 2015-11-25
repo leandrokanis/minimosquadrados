@@ -1,29 +1,38 @@
+function [] = angryquadrados()
+
 clear all
 close all
 
-%Setting x and y coordinate for the piggie
+%+-----------------------------------------------------------------------+
+%|                        Variáveis                                      |
+%+-----------------------------------------------------------------------+
 
-a=10;
-b=100;
-c=0;
-d=200;
+quitGame = false;
 axis([0 100 0 100]);
 
-[pig_y, pig_x] = ginput(1);
+  function keyDownListener(src,event)    
+    switch event.Key
+      case 'r'
+        reset;
+      case 'q'
+        paused = false;
+        quitGame = true;
+    end
+  end
 
-% pig_x=round(a+(b-a).*rand(1))
-% pig_y=round(c+(d-c).*rand(1))
+function atirar
 
-% printf(piga_x);
-
+[click_x, click_y] = ginput(1);
+pig_y = 1;
+pig_x = 200;
 %Constants
 
 g=9.81;
 
 %inputs 
 % Cheat while troubleshooting
-v = 50 + 10*rand-2.5 
-theta = 180*atan2(pig_y, pig_x) / pi + 10*rand-2.5
+v = 50
+theta = 180*atan2(click_y, click_x) / pi 
 
 % v=input('What velocity would you like to launch your bird (in m/s)?');
 % theta=input('What angle would you like to launch your bird (in degress)?');
@@ -50,33 +59,37 @@ vxpig=pig_x./(t.*cos(theta));
 vypig=(.5*g*t.^2+pig_y)/(sin(theta).*t);
 vpig=sqrt(vxpig.^2+vypig.^2);
 
-
-
-for i =1 :length(t)
-    plot(x(i),y(i),'o','LineWidth',1,'MarkerEdgeColor','r')
-    if i == length(t)
-        plot(x(i),y(i),'*r', 'MarkerSize', 10, 'LineWidth', 2) % Bird splat!
+    for i =1 :length(t)
+        plot(x(i),y(i),'o','LineWidth',1,'MarkerEdgeColor','r')
+        if i == length(t)
+            plot(x(i),y(i),'*r', 'MarkerSize', 10, 'LineWidth', 2) % Bird splat!
+        end
+        axis([0,max([x,pig_x]),0,max([y,pig_y])])
+        hold on
+        plot(pig_x,pig_y,'-go', 'MarkerSize', 10, 'LineWidth', 5)
+        collision(i) = 0;
+        if abs(y(i)-pig_y)<5 && abs(x(i)-pig_x)<5
+            plot(x(i),y(i),'*g', 'MarkerSize', 40, 'LineWidth', 15) % Pig explodes!
+            collision (i) = 1;
+        end
+        xlabel('x (m)')
+        ylabel('y (m)')
+        plot(xlim, [0 0], '-k')
+    % xylim = [xlim; ylim]
+        axis equal
+    % axis([0,1.01*max(x),0,1.2*max(y)])
+        M(i)=getframe;
+        hold off
     end
-    axis([0,max([x,pig_x]),0,max([y,pig_y])])
-    hold on
-    plot(pig_x,pig_y,'-go')
-    collision(i) = 0;
-    if abs(y(i)-pig_y)<2 && abs(x(i)-pig_x)<2
-        plot(x(i),y(i),'*g', 'MarkerSize', 40, 'LineWidth', 2) % Pig explodes!
-        collision (i) = 1;
-    end
-    xlabel('x (m)')
-    ylabel('y (m)')
-    plot(xlim, [0 0], '-k')
-% xylim = [xlim; ylim]
-    axis equal
-% axis([0,1.01*max(x),0,1.2*max(y)])
-    M(i)=getframe;
-    hold off
+end %shoot
+
+while ~quitGame
+    atirar;
 end
 
-
-movie(M,2)
-
+close(atirar);
 
 pig_hit = find(collision == 1)
+
+end
+
