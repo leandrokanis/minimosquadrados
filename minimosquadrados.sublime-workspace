@@ -3,6 +3,14 @@
 	{
 		"selected_items":
 		[
+			[
+				"pe",
+				"pega_pontos"
+			],
+			[
+				"clic",
+				"click_y"
+			]
 		]
 	},
 	"buffers":
@@ -11,25 +19,8 @@
 			"file": "main.m",
 			"settings":
 			{
-				"buffer_size": 1684,
+				"buffer_size": 2037,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "Ação\nAventura\nEstratégia\nRPG\nEsporte\nCorrida\nJogo on-line\nSimulação",
-			"settings":
-			{
-				"buffer_size": 67,
-				"line_ending": "Windows",
-				"name": "Ação"
-			}
-		},
-		{
-			"file": "/C/Users/Leandro/Documents/source_code.cpp",
-			"settings":
-			{
-				"buffer_size": 1725,
-				"line_ending": "Unix"
 			}
 		}
 	],
@@ -63,8 +54,16 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/C/Users/Leandro/Documents/minimosquadrados"
+	],
 	"file_history":
 	[
+		"/C/Users/Leandro/Desktop/shooter03.m",
+		"/C/Users/Leandro/Documents/projetile.m",
+		"/C/Users/Leandro/Desktop/splines.m",
+		"/C/Users/Leandro/Documents/source_code.cpp",
 		"/C/Users/Leandro/Documents/minimosquadrados/main.m",
 		"/C/Users/Leandro/Documents/CLIENTES/UMIC/moove/video apresentacao/roteiro.txt",
 		"/C/Users/Leandro/Documents/demos/ihc/feed.html",
@@ -74,7 +73,7 @@
 	],
 	"find":
 	{
-		"height": 30.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -88,6 +87,39 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"x",
+			"y",
+			"a",
+			"v",
+			"u",
+			"v",
+			"u",
+			"mouseDownListener",
+			"mouse",
+			"input",
+			"ginput",
+			"back",
+			"bg",
+			"black",
+			"back",
+			"fig",
+			"FIG",
+			"fig",
+			"FIG",
+			"fig",
+			"figure",
+			"createfig",
+			"font",
+			"plot",
+			"axis",
+			"close",
+			"axis",
+			"createf",
+			"LARGE_TEXT",
+			"mouseDownListener",
+			"PLOT_W",
+			"pointer",
+			"figure_color",
 			"\n",
 			"50",
 			"\n[",
@@ -118,7 +150,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -127,15 +159,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1684,
+						"buffer_size": 2037,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								419,
+								419
 							]
 						],
 						"settings":
@@ -145,65 +177,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1132.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 67,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								67
-							]
-						],
-						"settings":
-						{
-							"auto_name": "Ação",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/C/Users/Leandro/Documents/source_code.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1725,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1722,
-								1722
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": -0.0,
-						"translation.y": 121.0,
+						"translation.y": 66.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -294,7 +268,7 @@
 	{
 	},
 	"show_minimap": true,
-	"show_open_files": false,
+	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
 	"side_bar_width": 150.0,

@@ -8,23 +8,22 @@ close all
 %+-----------------------------------------------------------------------+
 
 quitGame = false;
+paused = false;
 axis([0 100 0 100]);
+background = imread('bg.png'); % Load a sample image
+projetil = imread('sure2.png');
 
-  function keyDownListener(src,event)    
-    switch event.Key
-      case 'r'
-        reset;
-      case 'q'
-        paused = false;
-        quitGame = true;
-    end
-  end
+theta = [];
+click_x = [];
+click_y = [];
+
+
 
 function atirar
 
 [click_x, click_y] = ginput(1);
 pig_y = 1;
-pig_x = 200;
+pig_x = 100;
 %Constants
 
 g=9.81;
@@ -33,9 +32,7 @@ g=9.81;
 % Cheat while troubleshooting
 v = 50
 theta = 180*atan2(click_y, click_x) / pi 
-
-% v=input('What velocity would you like to launch your bird (in m/s)?');
-% theta=input('What angle would you like to launch your bird (in degress)?');
+%theta é o angulo de lançamendo, deve ser definido por minimos quadrados
 
 % física
 theta=pi*theta/180;
@@ -46,7 +43,7 @@ t=0:dt:tmax-dt;
 x=(v*cos(theta)).*t;
 y=(v*sin(theta)).*t-g*.5*t.^2;
 
-% Check Limits
+% Checar Limites
 xy_max = [max(x) max(y)];
 xypig_max = [max([x pig_x]) max([y pig_y])];
 % break
@@ -54,18 +51,24 @@ xypig_max = [max([x pig_x]) max([y pig_y])];
 vx=x/(cos(theta).*t.^2);
 vy=(.5*g*t.^2+y)/(sin(theta).*t);
 vfinal=sqrt(vx.^2+vy.^2);
-% plot(x,y,pig_x,pig_y)
+% plotar(x,y,pig_x,pig_y)
 vxpig=pig_x./(t.*cos(theta));
 vypig=(.5*g*t.^2+pig_y)/(sin(theta).*t);
 vpig=sqrt(vxpig.^2+vypig.^2);
 
-    for i =1 :length(t)
+
+
+    for i = 1 :length(t)
+        %image([x(i)-5 x(i)],[y(i)-5 y(i)], projetil);
         plot(x(i),y(i),'o','LineWidth',1,'MarkerEdgeColor','r')
+
         if i == length(t)
             plot(x(i),y(i),'*r', 'MarkerSize', 10, 'LineWidth', 2) % Bird splat!
         end
+        
         axis([0,max([x,pig_x]),0,max([y,pig_y])])
         hold on
+
         plot(pig_x,pig_y,'-go', 'MarkerSize', 10, 'LineWidth', 5)
         collision(i) = 0;
         if abs(y(i)-pig_y)<5 && abs(x(i)-pig_x)<5
@@ -80,6 +83,8 @@ vpig=sqrt(vxpig.^2+vypig.^2);
     % axis([0,1.01*max(x),0,1.2*max(y)])
         M(i)=getframe;
         hold off
+        
+        pig_hit = find(collision == 1)
     end
 end %shoot
 
@@ -87,9 +92,4 @@ while ~quitGame
     atirar;
 end
 
-close(atirar);
-
-pig_hit = find(collision == 1)
-
 end
-
