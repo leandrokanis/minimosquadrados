@@ -10,8 +10,8 @@ close all
 quitGame = false;
 paused = false;
 axis([0 100 0 100]);
-background = imread('bg.png'); % Load a sample image
-projetil = imread('sure2.png');
+background = imread('src/bg.png'); % Load a sample image
+projetil = imread('src/sure2.png');
 
 theta = [];
 click_x = [];
