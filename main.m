@@ -46,11 +46,31 @@ vx=[];
 vy=[];
 vfinal=[];
 g=9.81;
-v = 50;
+v=50;
 vxpig=[];
+acetou = '';
+
+background = imread('src/bg.png');
+
 %posição do alvo
-pig_y = 1;
-pig_x = 180;
+pig_y = [];
+pig_x = [];
+
+function nivel1
+    pig_y = 2;
+    pig_x = 250;
+end
+
+function nivel2
+    pig_y = 2;
+    pig_x = 200;
+end
+
+
+function nivel3
+    pig_y = 0;
+    pig_x = 170;
+end
 
 %+-----------------------------------------------------------------------+
 %|                        funcoes do tiro                                      |
@@ -81,7 +101,7 @@ end
 
 function atirar
     for i = 1 :length(t)
-        %image([x(i)-5 x(i)],[y(i)-5 y(i)], projetil);
+        %image([x(i)-5 x(i)],[y(i)-5 y(i)], background);
         plot(x(i),y(i),'o','LineWidth',1,'MarkerEdgeColor','r')
 
         if i == length(t)
@@ -93,10 +113,14 @@ function atirar
 
         plot(pig_x,pig_y,'-go', 'MarkerSize', 10, 'LineWidth', 5)
         collision(i) = 0;
-        if abs(y(i)-pig_y)<2 && abs(x(i)-pig_x)<2
+        if abs(y(i)-pig_y)<3 && abs(x(i)-pig_x)<3
             plot(x(i),y(i),'*g', 'MarkerSize', 40, 'LineWidth', 15) % Pig explodes!
             collision (i) = 1;
+            acetou = 'ACERTOU!'
+        else
+            acetou = 'ERROU!'
         end
+
         plot(xlim, [0 0], '-k');
         axis equal;
         M(i)=getframe;
@@ -138,10 +162,28 @@ function plota
 end
 
 
+function reset
+    theta = [];
+    x=[];
+    y=[];
+    xmira=[0];
+    ymira=[0];
+    click_x=[];
+    click_y=[];
+    tmax =[];
+    xmax =[];
+    dt =[];
+    t =[];
+    xy_max =[];
+    xypig_max =[];
+    vx=[];
+    vy=[];
+    vfinal=[];
+    vxpig=[];
+end
 
 
-
-% Last Modified by GUIDE v2.5 30-Nov-2015 04:09:46
+% Last Modified by GUIDE v2.5 30-Nov-2015 05:00:49
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -161,6 +203,17 @@ else
     gui_mainfcn(gui_State, varargin{:});
 end
 % End initialization code - DO NOT EDIT
+function pushbutton1_CreateFcn(hObject, eventdata, handles)
+end
+
+function pushbutton1_DeleteFcn(hObject, eventdata, handles)
+end
+
+% --- Executes on button press in pushbutton1.
+function pushbutton1_Callback(hObject, eventdata, handles)
+    quitGame=true;
+end
+
 
 % --- Executes just before main is made visible.
 function main_OpeningFcn(hObject, eventdata, handles, varargin)
@@ -177,7 +230,18 @@ function main_OpeningFcn(hObject, eventdata, handles, varargin)
 
     guidata(hObject, handles);
 
+    % UIWAIT makes main wait for user response (see UIRESUME)
+    % uiwait(handles.figure1);
+end
+
+% --- Outputs from this function are returned to the command line.
+function varargout = main_OutputFcn(hObject, eventdata, handles) 
+
+% Get default command line output from handles structure
+varargout{1} = handles.output;
+
     while ~quitGame
+        nivel2;
         pega_pontos;
         add_pontos;
         axes(handles.axesangulo);
@@ -187,22 +251,7 @@ function main_OpeningFcn(hObject, eventdata, handles, varargin)
         axes(handles.axesatirar);
         atirar;
     end
-
-    % UIWAIT makes main wait for user response (see UIRESUME)
-    % uiwait(handles.figure1);
-end
-
-% --- Outputs from this function are returned to the command line.
-function varargout = main_OutputFcn(hObject, eventdata, handles) 
-% varargout  cell array for returning output args (see VARARGOUT);
-% hObject    handle to figure
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-
-
-% Get default command line output from handles structure
-varargout{1} = handles.output;
+    
 end
 
 end %main
