@@ -18,7 +18,6 @@ click_x = [];
 click_y = [];
 
 
-
 function atirar
 
 [click_x, click_y] = ginput(1);
@@ -84,7 +83,7 @@ vpig=sqrt(vxpig.^2+vypig.^2);
         M(i)=getframe;
         hold off
         
-        pig_hit = find(collision == 1)
+        pig_hit = find(collision == 1);
     end
 end %shoot
 
