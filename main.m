@@ -21,6 +21,7 @@ function varargout = main(varargin)
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
 % Edit the above text to modify the response to help main
+% Edit the above text to modify the response to help main
 
 
 %+-----------------------------------------------------------------------+
@@ -49,8 +50,12 @@ g=9.81;
 v=50;
 vxpig=[];
 acetou = '';
-
+pontuacao = 0;
 background = imread('src/bg.png');
+background2 = imread('src/bg.jpg');
+[xx Fs] = audioread('src/bg-music.mp3');
+[ll Levelup] = audioread('src/levelup.flac');
+[hh Fexplosao] = audioread('src/SFX_Explosion_03.wav');
 
 %posição do alvo
 pig_y = [];
@@ -106,6 +111,7 @@ function atirar
 
         if i == length(t)
             plot(x(i),y(i),'*r', 'MarkerSize', 10, 'LineWidth', 2) % Bird splat!
+            sound(hh,Fexplosao);
         end
         
         axis([0,max([x,pig_x]),0,max([y,pig_y])])
@@ -115,7 +121,9 @@ function atirar
         collision(i) = 0;
         if abs(y(i)-pig_y)<3 && abs(x(i)-pig_x)<3
             plot(x(i),y(i),'*g', 'MarkerSize', 40, 'LineWidth', 15) % Pig explodes!
+            sound(ll,Levelup);
             collision (i) = 1;
+            pontuacao = pontuacao + 50
             acetou = 'ACERTOU!'
         else
             acetou = 'ERROU!'
@@ -211,7 +219,20 @@ end
 
 % --- Executes on button press in pushbutton1.
 function pushbutton1_Callback(hObject, eventdata, handles)
-    quitGame=true;
+    reset
+end
+
+function bg
+
+ha = axes('units','normalized', ...
+            'position',[0 0 1 1]);
+uistack(ha,'bottom');
+I=background;
+hi = imagesc(I)
+colormap gray
+set(ha,'handlevisibility','off', ...
+            'visible','off')
+
 end
 
 
@@ -227,7 +248,8 @@ function main_OpeningFcn(hObject, eventdata, handles, varargin)
     handles.output = hObject;
 
     % Update handles structure
-
+    sound(xx,Fs);
+    bg;
     guidata(hObject, handles);
 
     % UIWAIT makes main wait for user response (see UIRESUME)
@@ -239,7 +261,6 @@ function varargout = main_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
-
     while ~quitGame
         nivel2;
         pega_pontos;
@@ -247,6 +268,7 @@ varargout{1} = handles.output;
         axes(handles.axesangulo);
         plota;
         set(handles.angulobox, 'String', theta);
+        set(handles.text7, 'String', pontuacao);
         fisica;
         axes(handles.axesatirar);
         atirar;

@@ -82,3 +82,4 @@ function togglebutton1_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of togglebutton1
 tuto3
+close(tuto2)
