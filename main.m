@@ -52,7 +52,6 @@ vxpig=[];
 acetou = '';
 pontuacao = 0;
 background = imread('src/bg.png');
-background2 = imread('src/bg.jpg');
 [xx Fs] = audioread('src/bg-music.mp3');
 [ll Levelup] = audioread('src/levelup.flac');
 [hh Fexplosao] = audioread('src/SFX_Explosion_03.wav');
